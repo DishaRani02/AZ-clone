@@ -3,7 +3,11 @@ import React from 'react';
 function Navbar({ cartCount, setShowCart, search, setSearch, setShowOrderHistory, orderCount, setShowWishlist, wishlistCount }) {
   return (
     <div style={{ backgroundColor: '#131921', padding: '10px 20px', display: 'flex', alignItems: 'center', gap: '15px', flexWrap: 'wrap' }}>
-      <h1 style={{ color: 'white', fontSize: '24px', margin: 0, whiteSpace: 'nowrap' }}>amazon</h1>
+      <img 
+    src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg"
+    alt="Amazon"
+    style={{ height: '30px', filter: 'brightness(0) invert(1)' }}
+      />
       <input
         type="text"
         placeholder="Search products..."

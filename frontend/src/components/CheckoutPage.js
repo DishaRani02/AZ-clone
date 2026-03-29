@@ -29,22 +29,23 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout, addOrder })
     ).join('\n');
 
     try {
-      await emailjs.send(
-        'service_j87alnk',
-        'template_nnc839v',
-        {
-          to_name: form.name,
-          to_email: form.email,
-          order_id: id,
-          total: `₹${total}`,
-          address: `${form.address}, ${form.city} - ${form.pincode}`,
-          items: itemsList,
-        },
-        '136JVxy_FG1oK_-BR'
-      );
-    } catch (err) {
-      console.log('Email error:', err);
-    }
+  const result = await emailjs.send(
+    'service_j87alnk',
+    'template_nnc839v',
+    {
+      to_name: form.name,
+      to_email: form.email,
+      order_id: id,
+      total: `₹${total}`,
+      address: `${form.address}, ${form.city} - ${form.pincode}`,
+      items: itemsList,
+    },
+    '136JVxy_FG1oK_-BR'
+  );
+  console.log('Email sent!', result);
+} catch (err) {
+  console.log('Email error:', err);
+}
 
     const newOrder = {
       id: id,

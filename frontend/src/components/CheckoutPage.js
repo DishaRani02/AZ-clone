@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
+function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout, addOrder }) {
   const [form, setForm] = useState({
     name: '', email: '', phone: '', address: '', city: '', pincode: ''
   });

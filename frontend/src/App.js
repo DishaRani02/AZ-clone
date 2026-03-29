@@ -120,15 +120,11 @@ function App() {
             </div>
           ) : filteredProducts.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px', color: '#666' }}>
-              😕 Koi product nahi mila!
+              😕 NO PRODUCTS FOUND!
             </div>
           ) : (
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-              gap: '20px',
-              padding: '20px'
-            }}>
+            
+            <div className="products-grid">
               {filteredProducts.map(product => (
                 <ProductCard
                   key={product.id}

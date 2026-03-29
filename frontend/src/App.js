@@ -4,6 +4,7 @@ import ProductCard from './components/ProductCard';
 import CartPage from './components/CartPage';
 import CheckoutPage from './components/CheckoutPage';
 import ProductDetailPage from './components/ProductDetailPage';
+import OrderHistory from './components/OrderHistory';
 import './App.css';
 
 const categories = ['All', 'Electronics', 'Fashion', 'Kitchen', 'Home', 'Sports'];
@@ -11,14 +12,15 @@ const categories = ['All', 'Electronics', 'Fashion', 'Kitchen', 'Home', 'Sports'
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showCheckout, setShowCheckout] = useState(false);
   const [showDetail, setShowDetail] = useState(null);
+  const [showOrderHistory, setShowOrderHistory] = useState(false);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  // Backend se products lao
   useEffect(() => {
     fetch('https://az-clone-backend.vercel.app/api/products')
       .then(res => res.json())
@@ -46,6 +48,10 @@ function App() {
     });
   };
 
+  const addOrder = (order) => {
+    setOrders(prev => [order, ...prev]);
+  };
+
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const filteredProducts = products.filter(p => {
@@ -61,14 +67,19 @@ function App() {
         setShowCart={setShowCart}
         search={search}
         setSearch={setSearch}
+        setShowOrderHistory={setShowOrderHistory}
+        orderCount={orders.length}
       />
 
-      {showCheckout ? (
+      {showOrderHistory ? (
+        <OrderHistory orders={orders} setShowOrderHistory={setShowOrderHistory} />
+      ) : showCheckout ? (
         <CheckoutPage
           cart={cart}
           setCart={setCart}
           setShowCart={setShowCart}
           setShowCheckout={setShowCheckout}
+          addOrder={addOrder}
         />
       ) : showCart ? (
         <CartPage
@@ -85,45 +96,30 @@ function App() {
         />
       ) : (
         <div>
-          {/* Category Filter */}
-          <div style={{
-            display: 'flex',
-            gap: '10px',
-            padding: '15px 20px',
-            backgroundColor: 'white',
-            borderBottom: '1px solid #ddd',
-            overflowX: 'auto'
-          }}>
+          <div className="category-bar">
             {categories.map(cat => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
+                className="category-btn"
                 style={{
-                  padding: '8px 20px',
-                  borderRadius: '20px',
-                  border: '1px solid #ddd',
-                  cursor: 'pointer',
-                  fontWeight: 'bold',
                   backgroundColor: activeCategory === cat ? '#131921' : 'white',
                   color: activeCategory === cat ? 'white' : 'black',
-                  whiteSpace: 'nowrap'
                 }}>
                 {cat}
               </button>
             ))}
           </div>
 
-          {/* Loading */}
           {loading ? (
             <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px' }}>
               Loading products... ⏳
             </div>
           ) : filteredProducts.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px', color: '#666' }}>
-              😕 NO PRODUCTS FOUND!
+              😕 No products found!
             </div>
           ) : (
-            
             <div className="products-grid">
               {filteredProducts.map(product => (
                 <ProductCard

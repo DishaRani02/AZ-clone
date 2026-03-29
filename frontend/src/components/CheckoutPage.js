@@ -21,6 +21,17 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
     const id = 'ORD' + Date.now();
     setOrderId(id);
     setOrderPlaced(true);
+
+    const newOrder = {
+      id: id,
+      items: cart,
+      address: `${form.address}, ${form.city} - ${form.pincode}`,
+      total: total,
+      status: 'Confirmed',
+      createdAt: new Date()
+    };
+
+    addOrder(newOrder);
     setCart([]);
   };
 

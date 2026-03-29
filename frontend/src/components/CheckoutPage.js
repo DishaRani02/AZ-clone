@@ -15,7 +15,7 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
 
   const placeOrder = () => {
     if (!form.name || !form.address || !form.city || !form.pincode) {
-      alert('Sabhi fields bharo!');
+      alert('Please fill all fields!');
       return;
     }
     const id = 'ORD' + Date.now();
@@ -36,7 +36,7 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
         border: '1px solid #ddd'
       }}>
         <div style={{ fontSize: '60px' }}>🎉</div>
-        <h2 style={{ color: '#007600' }}>Order Place Ho Gaya!</h2>
+        <h2 style={{ color: '#007600' }}>Order Placed Successfully!!</h2>
         <p style={{ fontSize: '18px' }}>Order ID: <strong>{orderId}</strong></p>
         <p>Delivery address: {form.address}, {form.city} - {form.pincode}</p>
         <button
@@ -51,7 +51,7 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
             fontSize: '16px',
             marginTop: '20px'
           }}>
-          Wapas Shopping Karo
+          Continue Shopping
         </button>
       </div>
     );
@@ -70,7 +70,7 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
           fontWeight: 'bold',
           marginBottom: '20px'
         }}>
-        ← Cart pe Wapas Jao
+        ← Back to Cart
       </button>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
@@ -84,11 +84,11 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
         }}>
           <h3>Delivery Address</h3>
           {[
-            { label: 'Poora Naam', name: 'name', type: 'text' },
+            { label: 'Full Name', name: 'name', type: 'text' },
             { label: 'Email', name: 'email', type: 'email' },
             { label: 'Phone Number', name: 'phone', type: 'tel' },
-            { label: 'Ghar ka Address', name: 'address', type: 'text' },
-            { label: 'Shehar (City)', name: 'city', type: 'text' },
+            { label: 'Street Address', name: 'address', type: 'text' },
+            { label: 'City', name: 'city', type: 'text' },
             { label: 'Pincode', name: 'pincode', type: 'text' },
           ].map(field => (
             <div key={field.name} style={{ marginBottom: '15px' }}>
@@ -159,7 +159,7 @@ function CheckoutPage({ cart, setCart, setShowCart, setShowCheckout }) {
               fontWeight: 'bold',
               fontSize: '18px'
             }}>
-            Order Place Karo 🛒
+            Place Order 🛒
           </button>
         </div>
       </div>

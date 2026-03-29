@@ -25,13 +25,13 @@ function CartPage({ cart, setCart, setShowCart, setShowCheckout }) {
           fontWeight: 'bold',
           marginBottom: '20px'
         }}>
-        ← Wapas Jao
+        ← Go Back
       </button>
 
       <h2>Shopping Cart</h2>
 
       {cart.length === 0 ? (
-        <p>Cart khali hai!</p>
+        <p>Your cart is empty!</p>
       ) : (
         <>
           {cart.map(item => (
@@ -83,7 +83,7 @@ function CartPage({ cart, setCart, setShowCart, setShowCheckout }) {
                 fontWeight: 'bold',
                 fontSize: '16px'
               }}>
-              Checkout →
+              Proceed to Checkout →
             </button>
           </div>
         </>

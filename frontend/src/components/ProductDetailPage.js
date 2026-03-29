@@ -15,7 +15,7 @@ function ProductDetailPage({ product, addToCart, setShowDetail }) {
   return (
     <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto' }}>
 
-      {/* Wapas jao button */}
+      {/* Go Back button */}
       <button
         onClick={() => setShowDetail(null)}
         style={{

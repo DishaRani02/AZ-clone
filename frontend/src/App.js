@@ -51,9 +51,10 @@ function App() {
   const addOrder = (order) => setOrders(prev => [order, ...prev]);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
-  const filteredProducts = products.filter(p => {
+ const filteredProducts = products.filter(p => {
     const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
-    const matchCategory = activeCategory === 'All' || p.category === activeCategory;
+    const matchCategory = activeCategory === 'All' || 
+      (p.categories && p.categories.name === activeCategory);
     return matchSearch && matchCategory;
   });
 

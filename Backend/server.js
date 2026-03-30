@@ -18,8 +18,7 @@ app.get('/api/products', async (req, res) => {
   }
   
   if (req.query.category && req.query.category !== 'All') {
-    const { data: cat } = await supabase.from('categories').select('id').eq('name', req.query.category).single();
-    if (cat) query = query.eq('category_id', cat.id);
+    query = query.eq('categories.name', req.query.category);
   }
 
   const { data, error } = await query;
